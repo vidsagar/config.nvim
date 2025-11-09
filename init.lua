@@ -3,7 +3,7 @@ vim.g.maplocalleader = ' '
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local out = vim.fn.system {
+  vim.fn.system {
     'git',
     'clone',
     '--filter=blob:none',
@@ -11,9 +11,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     'https://github.com/folke/lazy.nvim.git',
     lazypath,
   }
-  if vim.v.shell_error ~= 0 then
-    error('Error cloning lazy.nvim:\n' .. out)
-  end
 end
 
 vim.opt.rtp:prepend(lazypath)
@@ -44,6 +41,3 @@ require('lazy').setup('plugins', {
     },
   },
 })
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
